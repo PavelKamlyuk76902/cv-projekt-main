@@ -1,6 +1,57 @@
 // Student ID: 76902 - Pavel Kamlyuk
 
 // ==========================================
+// ZADANIE 6 - Ładowanie danych z JSON
+// ==========================================
+
+async function loadCVData() {
+    try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        
+        // Umiejętności
+        const listaUmiejetnosci = document.getElementById('lista-umiejetnosci');
+        if (listaUmiejetnosci) {
+            listaUmiejetnosci.innerHTML = '';
+            data.umiejetnosci.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                listaUmiejetnosci.appendChild(li);
+            });
+        }
+        
+        // Projekty
+        const listaProjekty = document.getElementById('lista-projekty');
+        if (listaProjekty) {
+            listaProjekty.innerHTML = '';
+            data.projekty.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                listaProjekty.appendChild(li);
+            });
+        }
+        
+        // Doświadczenie
+        const listaDoswiadczenie = document.getElementById('lista-doswiadczenie');
+        if (listaDoswiadczenie) {
+            listaDoswiadczenie.innerHTML = '';
+            data.doswiadczenie.forEach(item => {
+                const article = document.createElement('article');
+                article.innerHTML = `<h3>${item.stanowisko}</h3><p>${item.okres}</p><p>${item.opis}</p>`;
+                listaDoswiadczenie.appendChild(article);
+            });
+        }
+        
+        console.log('Dane JSON załadowane - student 76902');
+    } catch (error) {
+        console.error('Błąd ładowania JSON:', error);
+    }
+}
+
+// Uruchomienie po załadowaniu strony
+document.addEventListener('DOMContentLoaded', loadCVData);
+
+// ==========================================
 // ZADANIE 4 - Przełączanie motywu i ukrywanie sekcji
 // ==========================================
 
@@ -46,7 +97,6 @@ const emailError = document.getElementById('emailError');
 const wiadomoscError = document.getElementById('wiadomoscError');
 const successMessage = document.getElementById('successMessage');
 
-// Funkcja walidująca imię
 function validateImie(imie) {
     if (imie.trim() === '') {
         return 'Pole "Imię" jest wymagane';
@@ -57,7 +107,6 @@ function validateImie(imie) {
     return '';
 }
 
-// Funkcja walidująca nazwisko
 function validateNazwisko(nazwisko) {
     if (nazwisko.trim() === '') {
         return 'Pole "Nazwisko" jest wymagane';
@@ -68,7 +117,6 @@ function validateNazwisko(nazwisko) {
     return '';
 }
 
-// Funkcja walidująca e-mail
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
@@ -81,7 +129,6 @@ function validateEmail(email) {
     return '';
 }
 
-// Funkcja walidująca wiadomość
 function validateWiadomosc(wiadomosc) {
     if (wiadomosc.trim() === '') {
         return 'Pole "Wiadomość" jest wymagane';
@@ -89,7 +136,6 @@ function validateWiadomosc(wiadomosc) {
     return '';
 }
 
-// Walidacja w czasie rzeczywistym (blur)
 imieInput.addEventListener('blur', function() {
     const error = validateImie(imieInput.value);
     imieError.textContent = error;
@@ -114,7 +160,6 @@ wiadomoscInput.addEventListener('blur', function() {
     wiadomoscError.style.display = error ? 'block' : 'none';
 });
 
-// Walidacja przy wysyłaniu formularza
 form.addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -155,4 +200,4 @@ form.addEventListener('submit', function(e) {
     }
 });
 
-console.log('Skrypt JS załadowany - student 76902 (Zadanie 4 + 5)');
+console.log('Skrypt JS załadowany - student 76902 (Zadanie 4 + 5 + 6)');
