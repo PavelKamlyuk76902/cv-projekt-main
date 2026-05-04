@@ -1,12 +1,4 @@
 {
-  "student": {
-    "imie": "Pavel",
-    "nazwisko": "Kamlyuk",
-    "id": "76902",
-    "email": "pkamlyu1@stu.vistula.edu.pl",
-    "telefon": "+48 573 255 100",
-    "miasto": "Warszawa"
-  },
   "umiejetnosci": [
     "HTML/CSS/JavaScript",
     "C#",
